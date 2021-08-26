@@ -1,4 +1,4 @@
-A simple example for using OpenTrace and Jaegar.
+A simple example for using OpenTrace and Jaeger.
 
 ```shell
 docker build -t service-one -f service-one/Dockerfile .
