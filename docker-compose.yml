@@ -1,0 +1,25 @@
+version: '3'
+services:
+  service-one:
+    image: service-one
+    ports:
+      - "8081:8081"
+    environment:
+      - OUTBOUND_HOST_PORT=service-two:8082
+      - JAEGER_SERVICE_NAME=service-one
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_SAMPLER_TYPE=const
+      - JAEGER_SAMPLER_PARAM=1
+      - JAEGER_REPORTER_LOG_SPANS=true
+  service-two:
+    image: service-two
+    environment:
+      - JAEGER_SERVICE_NAME=service-two
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_SAMPLER_TYPE=const
+      - JAEGER_SAMPLER_PARAM=1
+      - JAEGER_REPORTER_LOG_SPANS=true
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports:
+      - "16686:16686"
